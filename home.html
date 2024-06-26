@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appointmentApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/style2.css">
+</head>
+<body ng-controller="AppointmentController as vm">
+    <!-- Header with Navigation Links -->
+    <header>
+        <div class="header-container">
+            <h1 class="logo">Appointment Management</h1>
+            <nav class="navigation-links">
+                <a href="about.html">About</a>
+                <a href="#search">Search</a>
+                <a href="create.html">Create Appointment</a>
+                <a href="/view" id="viewAll">View All/Delete</a>
+            </nav>
+        </div>
+    </header>
+
+   <main>
+    <div class="main-container">
+        <h2 id="current-date"></h2>
+        <div class="time-slots"></div>
+    </div>
+</main>
+
+    <footer>
+        <!-- Footer content -->
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>// app.js
+
+// Function to generate time slots and fetch appointments
+async function generateTimeSlots() {
+    const timeSlotsContainer = document.querySelector('.time-slots');
+    const currentDateElement = document.getElementById('current-date');
+    const currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
+
+    // Clear previous time slots
+    timeSlotsContainer.innerHTML = '';
+
+    // Display current date
+    currentDateElement.textContent = new Date().toDateString();
+
+    // Fetch appointments for the current date
+    try {
+        const response = await fetch('/appointments');
+        if (!response.ok) {
+            throw new Error('Failed to fetch appointments');
+        }
+        const appointments = await response.json();
+        
+        // Generate time slots from 12 AM to 11 PM
+        for (let i = 0; i < 24; i++) {
+            const hour = i < 10 ? `0${i}` : i;
+            const timeSlot = document.createElement('div');
+            timeSlot.classList.add('current-time-slot');
+            timeSlot.textContent = `${hour}:00`;
+            timeSlotsContainer.appendChild(timeSlot);
+
+            // Filter appointments for the current hour
+            const appointmentsForHour = appointments.filter(appointment => {
+                const appointmentHour = appointment.appointment_time.split(':')[0];
+                return parseInt(appointmentHour) === i;
+            });
+
+             appointmentsForHour.forEach((appointment, index) => {
+                const appointmentElement = document.createElement('div');
+                appointmentElement.classList.add('appointment');
+                appointmentElement.textContent = appointment.appointment_name;
+
+                // Dynamically assign background color
+                appointmentElement.style.backgroundColor = getRandomColor(index);
+
+                timeSlot.appendChild(appointmentElement);
+            });
+
+            // Append time slot to the container
+            timeSlotsContainer.appendChild(timeSlot);
+            
+            // Render appointments for the current time slot
+            
+        }
+    } catch (error) {
+        console.error('Error fetching appointments:', error);
+    }
+}
+
+ function getRandomColor(index) {
+    const colors = ['#B3B3B3', '#7A7A7A', '#A6A6A6', '#8C8C8C', '#999999', '#757575'];
+    return colors[index % colors.length];
+}
+// Function to render appointments within a time slot
+
+// Call function to generate time slots and fetch appointments
+generateTimeSlots();
+
+// Function to generate a random color in hexadecimal format
+
+
+</script>
+<script></script>
+</body>
+</html>

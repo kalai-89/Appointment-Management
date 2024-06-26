@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/css/regstyle.css">
+</head>
+<body>
+  <div class="wrapper">
+    <div class="form-wrapper sign-in">
+      <form action="/login" method="POST"> <!-- Updated action -->
+        <h2>Login</h2>
+        <div class="input-group">
+          <input type="text" id="loginUsername" name="username" required> <!-- Added name attribute -->
+          <label for="loginUsername">Username</label>
+        </div>
+        <div class="input-group">
+          <input type="password" id="loginPassword" name="password" required> <!-- Added name attribute -->
+          <label for="loginPassword">Password</label>
+        </div>
+        <div class="remember">
+          <label><input type="checkbox" id="rememberMe" name="rememberMe"> Remember me</label> <!-- Added name attribute -->
+        </div>
+        <button type="submit">Login</button>
+        <div class="signUp-link">
+          <p>Don't have an account? <a href="#" class="signUpBtn-link">Sign Up</a></p>
+        </div>
+      </form>
+    </div>
+    <div class="form-wrapper sign-up">
+      <form action="/register" method="POST"> <!-- Updated action -->
+        <h2>Sign Up</h2>
+        <div class="input-group">
+          <input type="text" id="signupUsername" name="username" required> <!-- Added name attribute -->
+          <label for="signupUsername">Username</label>
+        </div>
+        <div class="input-group">
+          <input type="email" id="signupEmail" name="email" required> <!-- Added name attribute -->
+          <label for="signupEmail">Email</label>
+        </div>
+        <div class="input-group">
+          <input type="password" id="signupPassword" name="password" required> <!-- Added name attribute -->
+          <label for="signupPassword">Password</label>
+        </div>
+        <div class="remember">
+          <label><input type="checkbox" id="agreeTerms" name="agreeTerms"> I agree to the terms & conditions</label> <!-- Added name attribute -->
+        </div>
+        <button type="submit">Sign Up</button>
+        <div class="signUp-link">
+          <p>Already have an account? <a href="#" class="signInBtn-link">Sign In</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="regscript.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Appointment</title>
+    <link rel="stylesheet" type="text/css" href="/css/style3.css">
+</head>
+<body>
+<header>
+    <div class="header-container">
+        <h1 class="logo">Appointment Management</h1>
+        <nav class="navigation-links">
+            <a href="about.html">About</a>
+            <a href="#search">Search</a>
+            <a href="create.html" id="createAppointmentBtn">Create Appointment</a>
+            <a href="/view" id="viewAll">View All/Delete</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="main-container">
+        <h2>Create Appointment</h2>
+        <form id="create-appointment-form" action="/create-appointment" method="POST">
+            <div class="input-group">
+                <label for="appointment-date">Date:</label>
+                <input type="date" id="appointment-date" name="date" required>
+            </div>
+            <div class="input-group">
+                <label for="appointment-time">Time:</label>
+                <input type="time" id="appointment-time" name="time" required>
+            </div>
+            <div class="input-group">
+                <label for="appointment-name">Appointment Name:</label>
+                <input type="text" id="appointment-name" name="name" required>
+            </div>
+            <div class="input-group">
+                <label for="appointment-description">Description:</label>
+                <textarea id="appointment-description" name="description" rows="4" required></textarea>
+            </div>
+            <button type="submit">Create Appointment</button>
+        </form>
+    </div>
+</main>
+
+<script>
+document.getElementById('createAppointmentBtn').addEventListener('click', function(event) {
+    event.preventDefault(); 
+    window.location.href = this.getAttribute('href'); 
+});
+</script>
+
+</body>
+</html>
